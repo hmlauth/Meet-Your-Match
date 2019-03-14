@@ -1,0 +1,23 @@
+{
+  "name": "Meet-Your-Match",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hmlauth/Meet-Your-Match.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hmlauth/Meet-Your-Match/issues"
+  },
+  "homepage": "https://github.com/hmlauth/Meet-Your-Match#readme"
+}
