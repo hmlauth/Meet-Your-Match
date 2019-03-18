@@ -177,7 +177,7 @@
         </div>
         <div class="modal-body">
           <h2 id="match-name"></h2>
-          <img id="match-img" src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg" alt="">
+          <img id="match-img" src="" alt="">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -189,8 +189,37 @@
 
   <script type="text/javascript">
     // Capture the form inputs
+    $("#submit").on("click", function() {
 
-  </script>
+        event.preventDefault();
+
+        // Grab information from survery form/questions and store in object
+        var newFriend = {
+            name: $("#name").val().trim(),
+            photoLink: $("#photo").val().trim(),
+            scores: [
+                $("#q1").find(":selected").text(),
+                $("#q2").find(":selected").text(),
+                $("#q3").find(":selected").text(),
+                $("#q4").find(":selected").text(),
+                $("#q5").find(":selected").text(),
+                $("#q6").find(":selected").text(),
+                $("#q7").find(":selected").text(),
+                $("#q8").find(":selected").text(),
+                $("#q9").find(":selected").text(),
+                $("#q10").find(":selected").text()
+            ]
+        };
+
+        console.log("NewFriends", newFriend);
+
+        $.post("/api/friends", newFriend, function(data) {
+            console.log("I'm insider $.post of newFriend.")
+        })
+
+    })
+
+</script>
 
 </body>
 
