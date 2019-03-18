@@ -193,6 +193,32 @@
 
         event.preventDefault();
 
+// Form validation
+function validateForm() {
+        // Initialize isValid to true
+        var isValid = true;
+        // select .form-control class and for 'each' do the following function
+        $(".form-control").each(function() {
+            // if the selected value, this, is empty, change isValid to false
+          if ($(this).val() === "") {
+            isValid = false;
+          }
+        });
+
+        //similarly for each drop down selection with class .chosen-select, for 'each' do the following function
+        $(".chosen-select").each(function() {
+            // if empty, then it's false
+          if ($(this).val() === "") {
+            isValid = false;
+          }
+        });
+
+        // return the value of isValid
+        return isValid;
+      }
+
+      // If all required fields are filled (if isValid returns true then we will select all survey input)
+      if (validateForm()) {
         // Grab information from survery form/questions and store in object
         var newFriend = {
             name: $("#name").val().trim(),
@@ -213,11 +239,23 @@
 
         console.log("NewFriends", newFriend);
 
+        // AJAX post the data to my friendsList array in friends.js
         $.post("/api/friends", newFriend, function(data) {
-            console.log("I'm insider $.post of newFriend.")
-        })
 
-    })
+            // COMPARE FRIENDS
+            // Grab the result from the AJAX post so that the best match's name and photo are displayed.
+            $("#match-name").text(data.name);
+            $("#match-img").attr("src", data.photo);
+
+            // Show the modal with the best match
+            $("#results-modal").modal("toggle");
+
+        });
+    } else {
+        alert("Please fill out all fields before submitting!");
+    } // end of validation function
+
+}) // end of on click of submit button function
 
 </script>
 
