@@ -37,4 +37,11 @@ module.exports = function(app) {
         friendsData.push(req.body)
     });
 
+    app.post("/api/clear", function(req, res) {
+        // Empty out the arrays of data
+        friendsData.length = [];
+    
+        res.json({ ok: true });
+      });
+
   };
