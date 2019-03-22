@@ -9,7 +9,7 @@ const express = require("express");
 // Set up Express app and define PORT
 //============================================================================
 var app = express();
-var PORT = 3000;
+var PORT = process.env.PORT || 3000;
 
 // Set up Middleware so Express app knows how to handle data parsing
 //============================================================================
