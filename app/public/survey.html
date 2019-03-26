@@ -224,16 +224,16 @@ function validateForm() {
             name: $("#name").val().trim(),
             photoLink: $("#photo").val().trim(),
             scores: [
-                $("#q1").find(":selected").text(),
-                $("#q2").find(":selected").text(),
-                $("#q3").find(":selected").text(),
-                $("#q4").find(":selected").text(),
-                $("#q5").find(":selected").text(),
-                $("#q6").find(":selected").text(),
-                $("#q7").find(":selected").text(),
-                $("#q8").find(":selected").text(),
-                $("#q9").find(":selected").text(),
-                $("#q10").find(":selected").text()
+                $("#q1").find(":selected").text().slice(0,1),
+                $("#q2").find(":selected").text().slice(0,1),
+                $("#q3").find(":selected").text().slice(0,1),
+                $("#q4").find(":selected").text().slice(0,1),,
+                $("#q5").find(":selected").text().slice(0,1),
+                $("#q6").find(":selected").text().slice(0,1),
+                $("#q7").find(":selected").text().slice(0,1),
+                $("#q8").find(":selected").text().slice(0,1),
+                $("#q9").find(":selected").text().slice(0,1),
+                $("#q10").find(":selected").text().slice(0,1)
             ]
         };
 
@@ -244,8 +244,9 @@ function validateForm() {
 
             // COMPARE FRIENDS
             // =============================
-            // var eachPerson = friendsList[i].scores
-            // eachPerson[i]
+            
+
+
             // =============================
             // Grab the result from the AJAX post so that the best match's name and photo are displayed.
             $("#match-name").text(data.name);
