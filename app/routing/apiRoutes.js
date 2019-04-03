@@ -7,20 +7,20 @@
 // These data sources hold arrays of the survey result information.
 // ===============================================================================
 
-var friendsData = require("../data/friends");
+var friendsData = require("../data/friends.js");
 
 // ===============================================================================
 // ROUTING
 // ===============================================================================
 
-module.exports = function(app) {
+module.exports = function (app) {
     // API GET Requests
     // Below code handles when users "visit" a page.
     // In each of the below cases when a user visits a link
     // (ex: localhost:PORT/api/admin... they are shown a JSON of the data in the table)
     // ---------------------------------------------------------------------------
 
-    app.get("/api/friends", function(req, res) {
+    app.get("/api/friends", function (req, res) {
         res.json(friendsData);
     });
 
@@ -32,16 +32,48 @@ module.exports = function(app) {
     // Then the server saves the data to the tableData array)
     // ---------------------------------------------------------------------------
 
-    app.post("/api/friends", function(req, res) {
+    app.post("/api/friends", function (req, res) {
         console.log("Req.body", req.body);
-        friendsData.push(req.body)
+
+        var userData = req.body;
+        var userScores = userData.scores;
+        console.log("userScores", userScores);
+        var bestMatch = 0;
+        var leastDifferent = -Infinity;
+
+        // iterate over length of current json object "arr"
+        for (var i = 0; i < friendsData.length; i++) {
+            // For each comparison set totalDifference to 0 to start
+            var totalDifference = 0;
+
+            // iterate over current user's scores.length, "reqBody"
+            for (var j = 0; j < friendsData[i].scores.length; j++) {
+                totalDifference += Math.abs(parseInt(userScores[j] - parseInt(friendsData[i].scores[j])))
+
+                if (leastDifferent != -Infinity || totalDifference < leastDifferent) {
+                    leastDifferent = totalDifference;
+                    bestMatch = i;
+                }
+
+                bestMatchObj = {
+                    name: friendsData[bestMatch].name,
+                    photo: friendsData[bestMatch].photo
+                }
+
+                res.json(bestMatchObj);
+
+                friendsData.push(userData);
+            }
+        }
+
+
     });
 
-    app.post("/api/clear", function(req, res) {
+    app.post("/api/clear", function (req, res) {
         // Empty out the arrays of data
         friendsData.length = [];
-    
-        res.json({ ok: true });
-      });
 
-  };
+        res.json({ ok: true });
+    });
+
+};

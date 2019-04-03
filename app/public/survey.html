@@ -227,7 +227,7 @@ function validateForm() {
                 $("#q1").find(":selected").text().slice(0,1),
                 $("#q2").find(":selected").text().slice(0,1),
                 $("#q3").find(":selected").text().slice(0,1),
-                $("#q4").find(":selected").text().slice(0,1),,
+                $("#q4").find(":selected").text().slice(0,1),
                 $("#q5").find(":selected").text().slice(0,1),
                 $("#q6").find(":selected").text().slice(0,1),
                 $("#q7").find(":selected").text().slice(0,1),
@@ -241,11 +241,12 @@ function validateForm() {
 
         // AJAX post the data to my friendsList array in friends.js
         $.post("/api/friends", newFriend, function(data) {
-
+          
             // COMPARE FRIENDS
             // =============================
-            
-
+            // data is the req.body so we need to store req.body into a variable
+            console.log("Data", data);
+          
 
             // =============================
             // Grab the result from the AJAX post so that the best match's name and photo are displayed.
